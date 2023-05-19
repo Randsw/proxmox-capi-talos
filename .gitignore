@@ -1,0 +1,7 @@
+iso/
+*.iso
+/packer_cache
+*_rsa
+*.img
+credential.pkrvars.hcl
+nocloud-amd64.raw.xz
