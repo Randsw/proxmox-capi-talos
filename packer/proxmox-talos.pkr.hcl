@@ -8,15 +8,14 @@ packer {
 }
 
 
-source "proxmox" "talos" {
+source "proxmox-iso" "talos" {
   proxmox_url              = var.proxmox_url
   username                 = var.proxmox_username
   token                    = var.proxmox_token
   node                     = var.proxmox_nodename
   insecure_skip_tls_verify = true
 
-  //iso_file    = "local:iso/archlinux-2023.04.01-x86_64.iso"
-  iso_file = "local:iso/ubuntu-22.04.1-live-server-amd64.iso"
+  iso_file    = "local:iso/archlinux-2023.04.01-x86_64.iso"
   unmount_iso = true
 
   scsi_controller = "virtio-scsi-pci"
@@ -42,7 +41,9 @@ source "proxmox" "talos" {
   template_name        = "talos"
   template_description = "Talos system disk"
 
-  boot_wait = "25s"
+  boot_key_interval = "50ms"
+  boot_wait = "6s"
+
   boot_command = [
     "<enter><wait1m>",
     "passwd<enter><wait>packer<enter><wait>packer<enter>",
@@ -53,7 +54,7 @@ source "proxmox" "talos" {
 
 build {
   name    = "release"
-  sources = ["source.proxmox.talos"]
+  sources = ["source.proxmox-iso.talos"]
 
   provisioner "shell" {
     inline = [
@@ -65,7 +66,7 @@ build {
 
 build {
   name    = "develop"
-  sources = ["source.proxmox.talos"]
+  sources = ["source.proxmox-iso.talos"]
 
   provisioner "file" {
     source      = "iso/nocloud-amd64.raw.xz"
