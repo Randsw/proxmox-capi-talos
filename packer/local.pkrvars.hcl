@@ -1,4 +1,4 @@
-proxmox_url          = "https://127.0.0.1:8006/api2/json"
+proxmox_url          = "https://10.1.1.2:8006/api2/json"
 proxmox_username     = "root@pam!packer"  # API Token ID
 proxmox_storage      = "local-lvm"
 proxmox_storage_type = "lvm"
