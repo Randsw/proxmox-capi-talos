@@ -1,3 +1,5 @@
+# Kubernetes as a Service with Proxmox and Cluster API on Talos Linux
+
 ## Packer command
 
 Prepare infrastructure for Packer
@@ -36,4 +38,4 @@ Prepare infrastructure for Packer
 ```
 
 Run Packer command:
-    `packer build -only=develop.proxmox.talos -var-file="local.pkrvars.hcl" -var-file="credential.pkrvars.hcl" proxmox-talos.pkr.hcl`
+    `packer build -only=develop.proxmox-iso.talos -var-file="local.pkrvars.hcl" -var-file="credential.pkrvars.hcl" .`
