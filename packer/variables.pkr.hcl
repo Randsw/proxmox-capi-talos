@@ -18,10 +18,6 @@ variable "proxmox_storage" {
   type = string
 }
 
-variable "proxmox_storage_type" {
-  type = string
-}
-
 variable "static_ip" {
   type = string
 }

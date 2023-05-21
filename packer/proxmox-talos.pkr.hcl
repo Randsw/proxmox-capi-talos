@@ -26,7 +26,6 @@ source "proxmox-iso" "talos" {
   disks {
     type              = "scsi"
     storage_pool      = var.proxmox_storage
-    storage_pool_type = var.proxmox_storage_type
     format            = "raw"
     disk_size         = "1500M"
     cache_mode        = "writethrough"
