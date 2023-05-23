@@ -26,13 +26,13 @@ variable "kubernetes" {
 variable "cluster_name" {
   description = "A name to provide for the Talos cluster"
   type        = string
-  default     = "admin"
+  default     = "mgmt-cluste"
 }
 
 variable "region" {
   description = "A name to provide for the Talos cluster"
   type        = string
-  default     = "cluster-1"
+  default     = "pve"
 }
 
 variable "pool" {

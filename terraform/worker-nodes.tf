@@ -37,7 +37,7 @@ resource "proxmox_vm_qemu" "workers" {
   disk {
     type    = "scsi"
     storage = var.proxmox_storage1
-    size    = "10G"
+    size    = "15G"
     cache   = "writethrough"
     ssd     = 1
     backup  = false
