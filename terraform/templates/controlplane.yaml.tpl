@@ -217,7 +217,6 @@ cluster:
         namespace: flux-system
         name: cluster-settings
       data:
-        CACHE_REGISTRY: ${registry-endpoint}
         SIDERO_ENDPOINT: ${sidero-endpoint}
         STORAGE_CLASS: ${storageclass}
         STORAGE_CLASS_XFS: ${storageclass-xfs}
@@ -225,7 +224,7 @@ cluster:
   externalCloudProvider:
     enabled: true
     manifests:
-    - https://raw.githubusercontent.com/randsw/proxmox-capi-talos/main/manifests/coredns-local.yaml  #Kubernetes DNS system
+    - https://raw.githubusercontent.com/randsw/proxmox-capi-talos/main/manifests/coredns-local.yaml        #Kubernetes DNS system
     - https://raw.githubusercontent.com/metallb/metallb/v0.13.9/config/manifests/metallb-native.yaml       #MetalLB deploy
     - https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml           #Deploy metrics server
     - https://github.com/fluxcd/flux2/releases/latest/download/install.yaml                                #FluxCD deploy
