@@ -1,5 +1,7 @@
 # Kubernetes as a Service with Proxmox and Cluster API on Talos Linux
 
+Inspired by [Kubernetes As a Service (KAAS) in Proxmox](https://github.com/kubebn/talos-proxmox-kaas)
+
 ## Packer command
 
 Prepare infrastructure for Packer
