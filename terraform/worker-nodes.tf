@@ -1,5 +1,5 @@
 resource "proxmox_vm_qemu" "workers" {
-  count       = 2
+  count       = 3
   name        = "worker-${count.index}"
   target_node = var.target_node_name
   clone       = var.proxmox_image
@@ -14,8 +14,8 @@ resource "proxmox_vm_qemu" "workers" {
   onboot  = false
   cpu     = "host,flags=+aes"
   sockets = 1
-  cores   = 1
-  memory  = 2048
+  cores   = 2
+  memory  = 4096
   scsihw  = "virtio-scsi-pci"
 
   vga {
