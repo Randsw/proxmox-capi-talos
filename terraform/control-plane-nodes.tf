@@ -15,7 +15,7 @@ resource "proxmox_vm_qemu" "controlplanes" {
   cpu     = "host,flags=+aes"
   sockets = 1
   cores   = 4
-  memory  = 4096
+  memory  = 8192
   scsihw  = "virtio-scsi-pci"
 
   vga {

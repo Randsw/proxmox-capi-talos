@@ -202,47 +202,47 @@ data "talos_machine_configuration" "worker_1" {
   ]
 }
 
-data "talos_machine_configuration" "worker_2" {
-  cluster_name       = var.cluster_name
-  machine_type       = "worker"
-  cluster_endpoint   = var.cluster_endpoint
-  machine_secrets    = talos_machine_secrets.secrets.machine_secrets
-  kubernetes_version = var.k8s_version
-  talos_version      = var.talos_version
-  docs               = false
-  examples           = false
-  config_patches = [
-    templatefile("${path.module}/templates/worker.yaml.tpl",
-      merge(var.kubernetes, {
-        hostname   = "worker-1"
-        ipv4_local = "${cidrhost(var.vpc_main_cidr, var.worker_first_ip + 1)}"
-        px_region  = var.region
-        px_node    = var.target_node_name
-      })
-    )
-  ]
-}
+# data "talos_machine_configuration" "worker_2" {
+#   cluster_name       = var.cluster_name
+#   machine_type       = "worker"
+#   cluster_endpoint   = var.cluster_endpoint
+#   machine_secrets    = talos_machine_secrets.secrets.machine_secrets
+#   kubernetes_version = var.k8s_version
+#   talos_version      = var.talos_version
+#   docs               = false
+#   examples           = false
+#   config_patches = [
+#     templatefile("${path.module}/templates/worker.yaml.tpl",
+#       merge(var.kubernetes, {
+#         hostname   = "worker-1"
+#         ipv4_local = "${cidrhost(var.vpc_main_cidr, var.worker_first_ip + 1)}"
+#         px_region  = var.region
+#         px_node    = var.target_node_name
+#       })
+#     )
+#   ]
+# }
 
-data "talos_machine_configuration" "worker_3" {
-  cluster_name       = var.cluster_name
-  machine_type       = "worker"
-  cluster_endpoint   = var.cluster_endpoint
-  machine_secrets    = talos_machine_secrets.secrets.machine_secrets
-  kubernetes_version = var.k8s_version
-  talos_version      = var.talos_version
-  docs               = false
-  examples           = false
-  config_patches = [
-    templatefile("${path.module}/templates/worker.yaml.tpl",
-      merge(var.kubernetes, {
-        hostname   = "worker-2"
-        ipv4_local = "${cidrhost(var.vpc_main_cidr, var.worker_first_ip + 2)}"
-        px_region  = var.region
-        px_node    = var.target_node_name
-      })
-    )
-  ]
-}
+# data "talos_machine_configuration" "worker_3" {
+#   cluster_name       = var.cluster_name
+#   machine_type       = "worker"
+#   cluster_endpoint   = var.cluster_endpoint
+#   machine_secrets    = talos_machine_secrets.secrets.machine_secrets
+#   kubernetes_version = var.k8s_version
+#   talos_version      = var.talos_version
+#   docs               = false
+#   examples           = false
+#   config_patches = [
+#     templatefile("${path.module}/templates/worker.yaml.tpl",
+#       merge(var.kubernetes, {
+#         hostname   = "worker-2"
+#         ipv4_local = "${cidrhost(var.vpc_main_cidr, var.worker_first_ip + 2)}"
+#         px_region  = var.region
+#         px_node    = var.target_node_name
+#       })
+#     )
+#   ]
+# }
 
 resource "talos_machine_configuration_apply" "worker_apply_1" {
   depends_on = [
@@ -253,20 +253,20 @@ resource "talos_machine_configuration_apply" "worker_apply_1" {
   node                        = cidrhost(var.vpc_main_cidr, var.worker_first_ip)
 }
 
-resource "talos_machine_configuration_apply" "worker_apply_2" {
-  depends_on = [
-    proxmox_vm_qemu.workers
-  ]
-  client_configuration        = talos_machine_secrets.secrets.client_configuration
-  machine_configuration_input = data.talos_machine_configuration.worker_2.machine_configuration
-  node                        = cidrhost(var.vpc_main_cidr, var.worker_first_ip + 1)
-}
+# resource "talos_machine_configuration_apply" "worker_apply_2" {
+#   depends_on = [
+#     proxmox_vm_qemu.workers
+#   ]
+#   client_configuration        = talos_machine_secrets.secrets.client_configuration
+#   machine_configuration_input = data.talos_machine_configuration.worker_2.machine_configuration
+#   node                        = cidrhost(var.vpc_main_cidr, var.worker_first_ip + 1)
+# }
 
-resource "talos_machine_configuration_apply" "worker_apply_3" {
-  depends_on = [
-    proxmox_vm_qemu.workers
-  ]
-  client_configuration        = talos_machine_secrets.secrets.client_configuration
-  machine_configuration_input = data.talos_machine_configuration.worker_3.machine_configuration
-  node                        = cidrhost(var.vpc_main_cidr, var.worker_first_ip + 2)
-}
+# resource "talos_machine_configuration_apply" "worker_apply_3" {
+#   depends_on = [
+#     proxmox_vm_qemu.workers
+#   ]
+#   client_configuration        = talos_machine_secrets.secrets.client_configuration
+#   machine_configuration_input = data.talos_machine_configuration.worker_3.machine_configuration
+#   node                        = cidrhost(var.vpc_main_cidr, var.worker_first_ip + 2)
+# }
