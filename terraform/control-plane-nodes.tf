@@ -1,5 +1,5 @@
 resource "proxmox_vm_qemu" "controlplanes" {
-  count       = 3
+  count       = 1
   name        = "control-plane-${count.index}"
   target_node = var.target_node_name
   clone       = var.proxmox_image
@@ -14,8 +14,8 @@ resource "proxmox_vm_qemu" "controlplanes" {
   onboot  = false
   cpu     = "host,flags=+aes"
   sockets = 1
-  cores   = 2
-  memory  = 4096
+  cores   = 4
+  memory  = 8192
   scsihw  = "virtio-scsi-pci"
 
   vga {
@@ -37,7 +37,7 @@ resource "proxmox_vm_qemu" "controlplanes" {
   disk {
     type    = "scsi"
     storage = var.proxmox_storage2
-    size    = "20G"
+    size    = "40G"
     cache   = "writethrough"
     ssd     = 1
     backup  = false

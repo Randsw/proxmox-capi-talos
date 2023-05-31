@@ -1,21 +1,22 @@
-vpc_main_cidr         = "10.1.1.0/24"            # nodes subnet
-gateway               = "10.1.1.1"               # subnet gateway
-first_ip              = "5"                      # first ip address of the master-1 node - 10.1.1.5
-worker_first_ip       = "8"                      # first ip address of the worker-1 node - 10.1.1.8
-proxmox_host          = "https://10.1.1.2:8006/api2/json"
-proxmox_token_id      = "root@pam!terraform"
-proxmox_storage1      = "local-lvm"              # proxmox storage lvm 1
-proxmox_storage2      = "local-lvm"              # proxmox storage lvm 2
-target_node_name      = "pve"
-k8s_version           = "v1.27.1"                # k8s version
-proxmox_image         = "talos"                  # talos image created by packer
-talos_version         = "v1.4"                   # talos version for machineconfig gen
-cluster_endpoint      = "https://10.1.1.20:6443" # cluster endpoint to fetch via talosctl
-region                = "pve"                    # proxmox cluster name
-pool                  = "prod"                   # proxmox pool for vms
-private_key_file_path = "~/.ssh/id_ed25519"          # fluxcd git creds for ssh
-public_key_file_path  = "~/.ssh/id_ed25519.pub"      # fluxcd git creds for ssh
-known_hosts           = "github.com ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBEmKSENjQEezOmxkZMy7opKgwFB9nkt5YRrYMjNuG5N87uRgg6CLrbo5wAdT/y6v0mKV0U2w0WZ2YB/++Tpockg="
+vpc_main_cidr           = "10.1.1.0/24"            # nodes subnet
+gateway                 = "10.1.1.1"               # subnet gateway
+first_ip                = "5"                      # first ip address of the master-1 node - 10.1.1.5
+worker_first_ip         = "8"                      # first ip address of the worker-1 node - 10.1.1.8
+proxmox_host            = "https://10.1.1.2:8006/api2/json"
+proxmox_token_id        = "root@pam!terraform"
+proxmox_storage1        = "local-lvm"              # proxmox storage lvm 1
+proxmox_storage2        = "local-lvm"              # proxmox storage lvm 2
+target_node_name        = "pve"
+target_node_name_worker = "pve"
+k8s_version             = "v1.27.1"                # k8s version
+proxmox_image           = "talos"                  # talos image created by packer
+talos_version           = "v1.4"                   # talos version for machineconfig gen
+cluster_endpoint        = "https://10.1.1.20:6443" # cluster endpoint to fetch via talosctl
+region                  = "CAPI"                    # proxmox cluster name
+pool                    = "prod"                    # proxmox pool for vms
+private_key_file_path   = "~/.ssh/id_ed25519"          # fluxcd git creds for ssh
+public_key_file_path    = "~/.ssh/id_ed25519.pub"      # fluxcd git creds for ssh
+known_hosts             = "github.com ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBEmKSENjQEezOmxkZMy7opKgwFB9nkt5YRrYMjNuG5N87uRgg6CLrbo5wAdT/y6v0mKV0U2w0WZ2YB/++Tpockg="
 
 kubernetes = {
   podSubnets              = "10.244.0.0/16"       # pod subnet

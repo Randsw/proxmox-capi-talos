@@ -26,17 +26,17 @@ variable "kubernetes" {
 variable "cluster_name" {
   description = "A name to provide for the Talos cluster"
   type        = string
-  default     = "mgmt-cluste"
+  default     = "mgmt-cluster"
 }
 
 variable "region" {
-  description = "A name to provide for the Talos cluster"
+  description = "Equal to Proxmox cluster name"
   type        = string
   default     = "pve"
 }
 
 variable "pool" {
-  description = "A name to provide for the Talos cluster"
+  description = "Resource pool in Proxmox"
   type        = string
   default     = "prod"
 }
@@ -110,7 +110,12 @@ variable "gateway" {
 }
 
 variable "target_node_name" {
-  description = "Proxmox node name"
+  description = "Proxmox node name for CP"
+  type        = string
+}
+
+variable "target_node_name_worker" {
+  description = "Proxmox node name for workers"
   type        = string
 }
 
