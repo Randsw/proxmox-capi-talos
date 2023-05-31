@@ -196,7 +196,7 @@ data "talos_machine_configuration" "worker_1" {
         hostname   = "worker-0"
         ipv4_local = "${cidrhost(var.vpc_main_cidr, var.worker_first_ip)}"
         px_region  = var.region
-        px_node    = var.target_node_name
+        px_node    = var.target_node_name_worker
       })
     )
   ]
