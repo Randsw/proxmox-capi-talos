@@ -1251,165 +1251,165 @@ spec:
           name: cilium-config
 ---
 # Source: cilium/templates/hubble-relay/deployment.yaml
-# apiVersion: apps/v1
-# kind: Deployment
-# metadata:
-#   name: hubble-relay
-#   namespace: cilium
-#   labels:
-#     k8s-app: hubble-relay
-#     app.kubernetes.io/name: hubble-relay
-#     app.kubernetes.io/part-of: cilium
-# spec:
-#   replicas: 1
-#   selector:
-#     matchLabels:
-#       k8s-app: hubble-relay
-#   strategy:
-#     rollingUpdate:
-#       maxUnavailable: 1
-#     type: RollingUpdate
-#   template:
-#     metadata:
-#       annotations:
-#       labels:
-#         k8s-app: hubble-relay
-#         app.kubernetes.io/name: hubble-relay
-#         app.kubernetes.io/part-of: cilium
-#     spec:
-#       containers:
-#         - name: hubble-relay
-#           image: "quay.io/cilium/hubble-relay:v1.13.2@sha256:51b772cab0724511583c3da3286439791dc67d7c35077fa30eaba3b5d555f8f4"
-#           imagePullPolicy: IfNotPresent
-#           command:
-#             - hubble-relay
-#           args:
-#             - serve
-#           ports:
-#             - name: grpc
-#               containerPort: 4245
-#           readinessProbe:
-#             tcpSocket:
-#               port: grpc
-#           livenessProbe:
-#             tcpSocket:
-#               port: grpc
-#           volumeMounts:
-#           - name: config
-#             mountPath: /etc/hubble-relay
-#             readOnly: true
-#           - name: tls
-#             mountPath: /var/lib/hubble-relay/tls
-#             readOnly: true
-#           terminationMessagePolicy: FallbackToLogsOnError
-#       restartPolicy: Always
-#       priorityClassName: 
-#       serviceAccount: "hubble-relay"
-#       serviceAccountName: "hubble-relay"
-#       automountServiceAccountToken: false
-#       terminationGracePeriodSeconds: 1
-#       affinity:
-#         podAffinity:
-#           requiredDuringSchedulingIgnoredDuringExecution:
-#           - labelSelector:
-#               matchLabels:
-#                 k8s-app: cilium
-#             topologyKey: kubernetes.io/hostname
-#       nodeSelector:
-#         kubernetes.io/os: linux
-#       volumes:
-#       - name: config
-#         configMap:
-#           name: hubble-relay-config
-#           items:
-#           - key: config.yaml
-#             path: config.yaml
-#       - name: tls
-#         projected:
-#           # note: the leading zero means this number is in octal representation: do not remove it
-#           defaultMode: 0400
-#           sources:
-#           - secret:
-#               name: hubble-relay-client-certs
-#               items:
-#                 - key: ca.crt
-#                   path: hubble-server-ca.crt
-#                 - key: tls.crt
-#                   path: client.crt
-#                 - key: tls.key
-#                   path: client.key
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hubble-relay
+  namespace: cilium
+  labels:
+    k8s-app: hubble-relay
+    app.kubernetes.io/name: hubble-relay
+    app.kubernetes.io/part-of: cilium
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      k8s-app: hubble-relay
+  strategy:
+    rollingUpdate:
+      maxUnavailable: 1
+    type: RollingUpdate
+  template:
+    metadata:
+      annotations:
+      labels:
+        k8s-app: hubble-relay
+        app.kubernetes.io/name: hubble-relay
+        app.kubernetes.io/part-of: cilium
+    spec:
+      containers:
+        - name: hubble-relay
+          image: "quay.io/cilium/hubble-relay:v1.13.2@sha256:51b772cab0724511583c3da3286439791dc67d7c35077fa30eaba3b5d555f8f4"
+          imagePullPolicy: IfNotPresent
+          command:
+            - hubble-relay
+          args:
+            - serve
+          ports:
+            - name: grpc
+              containerPort: 4245
+          readinessProbe:
+            tcpSocket:
+              port: grpc
+          livenessProbe:
+            tcpSocket:
+              port: grpc
+          volumeMounts:
+          - name: config
+            mountPath: /etc/hubble-relay
+            readOnly: true
+          - name: tls
+            mountPath: /var/lib/hubble-relay/tls
+            readOnly: true
+          terminationMessagePolicy: FallbackToLogsOnError
+      restartPolicy: Always
+      priorityClassName: 
+      serviceAccount: "hubble-relay"
+      serviceAccountName: "hubble-relay"
+      automountServiceAccountToken: false
+      terminationGracePeriodSeconds: 1
+      affinity:
+        podAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+          - labelSelector:
+              matchLabels:
+                k8s-app: cilium
+            topologyKey: kubernetes.io/hostname
+      nodeSelector:
+        kubernetes.io/os: linux
+      volumes:
+      - name: config
+        configMap:
+          name: hubble-relay-config
+          items:
+          - key: config.yaml
+            path: config.yaml
+      - name: tls
+        projected:
+          # note: the leading zero means this number is in octal representation: do not remove it
+          defaultMode: 0400
+          sources:
+          - secret:
+              name: hubble-relay-client-certs
+              items:
+                - key: ca.crt
+                  path: hubble-server-ca.crt
+                - key: tls.crt
+                  path: client.crt
+                - key: tls.key
+                  path: client.key
 ---
 # Source: cilium/templates/hubble-ui/deployment.yaml
-# kind: Deployment
-# apiVersion: apps/v1
-# metadata:
-#   name: hubble-ui
-#   namespace: cilium
-#   labels:
-#     k8s-app: hubble-ui
-#     app.kubernetes.io/name: hubble-ui
-#     app.kubernetes.io/part-of: cilium
-# spec:
-#   replicas: 1
-#   selector:
-#     matchLabels:
-#       k8s-app: hubble-ui
-#   strategy:
-#     rollingUpdate:
-#       maxUnavailable: 1
-#     type: RollingUpdate
-#   template:
-#     metadata:
-#       annotations:
-#       labels:
-#         k8s-app: hubble-ui
-#         app.kubernetes.io/name: hubble-ui
-#         app.kubernetes.io/part-of: cilium
-#     spec:
-#       securityContext:
-#         fsGroup: 1001
-#         runAsGroup: 1001
-#         runAsUser: 1001
-#       priorityClassName: 
-#       serviceAccount: "hubble-ui"
-#       serviceAccountName: "hubble-ui"
-#       automountServiceAccountToken: true
-#       containers:
-#       - name: frontend
-#         image: "quay.io/cilium/hubble-ui:v0.11.0@sha256:bcb369c47cada2d4257d63d3749f7f87c91dde32e010b223597306de95d1ecc8"
-#         imagePullPolicy: IfNotPresent
-#         ports:
-#         - name: http
-#           containerPort: 8081
-#         volumeMounts:
-#         - name: hubble-ui-nginx-conf
-#           mountPath: /etc/nginx/conf.d/default.conf
-#           subPath: nginx.conf
-#         - name: tmp-dir
-#           mountPath: /tmp
-#         terminationMessagePolicy: FallbackToLogsOnError
-#       - name: backend
-#         image: "quay.io/cilium/hubble-ui-backend:v0.11.0@sha256:14c04d11f78da5c363f88592abae8d2ecee3cbe009f443ef11df6ac5f692d839"
-#         imagePullPolicy: IfNotPresent
-#         env:
-#         - name: EVENTS_SERVER_PORT
-#           value: "8090"
-#         - name: FLOWS_API_ADDR
-#           value: "hubble-relay:80"
-#         ports:
-#         - name: grpc
-#           containerPort: 8090
-#         volumeMounts:
-#         terminationMessagePolicy: FallbackToLogsOnError
-#       nodeSelector:
-#         kubernetes.io/os: linux
-#       volumes:
-#       - configMap:
-#           defaultMode: 420
-#           name: hubble-ui-nginx
-#         name: hubble-ui-nginx-conf
-#       - emptyDir: {}
-#         name: tmp-dir
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: hubble-ui
+  namespace: cilium
+  labels:
+    k8s-app: hubble-ui
+    app.kubernetes.io/name: hubble-ui
+    app.kubernetes.io/part-of: cilium
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      k8s-app: hubble-ui
+  strategy:
+    rollingUpdate:
+      maxUnavailable: 1
+    type: RollingUpdate
+  template:
+    metadata:
+      annotations:
+      labels:
+        k8s-app: hubble-ui
+        app.kubernetes.io/name: hubble-ui
+        app.kubernetes.io/part-of: cilium
+    spec:
+      securityContext:
+        fsGroup: 1001
+        runAsGroup: 1001
+        runAsUser: 1001
+      priorityClassName: 
+      serviceAccount: "hubble-ui"
+      serviceAccountName: "hubble-ui"
+      automountServiceAccountToken: true
+      containers:
+      - name: frontend
+        image: "quay.io/cilium/hubble-ui:v0.11.0@sha256:bcb369c47cada2d4257d63d3749f7f87c91dde32e010b223597306de95d1ecc8"
+        imagePullPolicy: IfNotPresent
+        ports:
+        - name: http
+          containerPort: 8081
+        volumeMounts:
+        - name: hubble-ui-nginx-conf
+          mountPath: /etc/nginx/conf.d/default.conf
+          subPath: nginx.conf
+        - name: tmp-dir
+          mountPath: /tmp
+        terminationMessagePolicy: FallbackToLogsOnError
+      - name: backend
+        image: "quay.io/cilium/hubble-ui-backend:v0.11.0@sha256:14c04d11f78da5c363f88592abae8d2ecee3cbe009f443ef11df6ac5f692d839"
+        imagePullPolicy: IfNotPresent
+        env:
+        - name: EVENTS_SERVER_PORT
+          value: "8090"
+        - name: FLOWS_API_ADDR
+          value: "hubble-relay:80"
+        ports:
+        - name: grpc
+          containerPort: 8090
+        volumeMounts:
+        terminationMessagePolicy: FallbackToLogsOnError
+      nodeSelector:
+        kubernetes.io/os: linux
+      volumes:
+      - configMap:
+          defaultMode: 420
+          name: hubble-ui-nginx
+        name: hubble-ui-nginx-conf
+      - emptyDir: {}
+        name: tmp-dir
 ---
 # Source: cilium/templates/cilium-secrets-namespace.yaml
 # Only create the namespace if it's different from Ingress secret namespace or Ingress is not enabled.

@@ -91,7 +91,7 @@ cluster:
     cni:
       name: custom
       urls:
-        - https://raw.githubusercontent.com/Randsw/proxmox-capi-talos/debug/terraform-cluster-deployment/manifests/cilium.yaml
+        - https://raw.githubusercontent.com/Randsw/proxmox-capi-talos/debug/cilium-hubble/terraform-cluster-deployment/manifests/cilium.yaml
   proxy:
     disabled: true
   etcd:
@@ -228,7 +228,7 @@ cluster:
     manifests:
     - https://raw.githubusercontent.com/randsw/proxmox-capi-talos/main/manifests/coredns-local.yaml        #Kubernetes DNS system
     - https://raw.githubusercontent.com/metallb/metallb/v0.13.9/config/manifests/metallb-native.yaml       #MetalLB deploy
-    #- https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml           #Deploy metrics server
+    - https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml           #Deploy metrics server
     #- https://github.com/fluxcd/flux2/releases/latest/download/install.yaml                                #FluxCD deploy
     #- https://raw.githubusercontent.com/randsw/proxmox-capi-talos/main/manifests/fluxcd-kustomization.yaml #FluxCD kustomization and initialize GitReposytory with manifest to sync
     - https://raw.githubusercontent.com/siderolabs/talos-cloud-controller-manager/main/docs/deploy/cloud-controller-manager.yml # Deploy Talos Cloud-controller 
