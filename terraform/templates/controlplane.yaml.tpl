@@ -81,6 +81,28 @@ machine:
       - name: br_netfilter
         parameters:
           - nf_conntrack_max=131072
+  registries:
+    mirrors:
+      docker.io:
+        endpoints:
+          - http://${registry-endpoint}:5000
+        #overridePath: true
+      ghcr.io:
+        endpoints:
+          - http://${registry-endpoint}:5004
+        #overridePath: true
+      gcr.io:
+        endpoints:
+          - http://${registry-endpoint}:5003
+        #overridePath: true
+      registry.k8s.io:
+        endpoints:
+          - http://${registry-endpoint}:5001
+        #overridePath: true
+      quay.io:
+        endpoints:
+          - http://${registry-endpoint}:5005
+        #overridePath: true
 cluster:
   controlPlane:
     endpoint: https://${apiDomain}:6443
@@ -91,7 +113,7 @@ cluster:
     cni:
       name: custom
       urls:
-        - https://raw.githubusercontent.com/Randsw/proxmox-capi-talos/debug/cilium-hubble/terraform-cluster-deployment/manifests/cilium.yaml
+        - https://raw.githubusercontent.com/Randsw/proxmox-capi-talos/debug/cilium-hubble/manifests/cilium.yaml
   proxy:
     disabled: true
   etcd:

@@ -69,6 +69,28 @@ machine:
       - name: br_netfilter
         parameters:
           - nf_conntrack_max=131072
+  registries:
+    mirrors:
+      docker.io:
+        endpoints:
+          - http://${registry-endpoint}:5000
+        #overridePath: true
+      ghcr.io:
+        endpoints:
+          - http://${registry-endpoint}:5004
+        #overridePath: true
+      gcr.io:
+        endpoints:
+          - http://${registry-endpoint}:5003
+        #overridePath: true
+      registry.k8s.io:
+        endpoints:
+          - http://${registry-endpoint}:5001
+        #overridePath: true
+      quay.io:
+        endpoints:
+          - http://${registry-endpoint}:5005
+        #overridePath: true
 cluster:
   controlPlane:
     endpoint: https://${apiDomain}:6443
