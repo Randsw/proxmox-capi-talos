@@ -81,6 +81,28 @@ machine:
       - name: br_netfilter
         parameters:
           - nf_conntrack_max=131072
+  registries:
+    mirrors:
+      docker.io:
+        endpoints:
+          - http://${registry-endpoint}:5000
+        #overridePath: true
+      ghcr.io:
+        endpoints:
+          - http://${registry-endpoint}:5004
+        #overridePath: true
+      gcr.io:
+        endpoints:
+          - http://${registry-endpoint}:5003
+        #overridePath: true
+      registry.k8s.io:
+        endpoints:
+          - http://${registry-endpoint}:5001
+        #overridePath: true
+      quay.io:
+        endpoints:
+          - http://${registry-endpoint}:5005
+        #overridePath: true
 cluster:
   controlPlane:
     endpoint: https://${apiDomain}:6443
@@ -91,7 +113,7 @@ cluster:
     cni:
       name: custom
       urls:
-        - https://raw.githubusercontent.com/Randsw/proxmox-capi-talos/debug/terraform-cluster-deployment/manifests/cilium.yaml
+        - https://raw.githubusercontent.com/Randsw/proxmox-capi-talos/debug/cilium-hubble/manifests/cilium.yaml
   proxy:
     disabled: true
   etcd:
@@ -228,7 +250,7 @@ cluster:
     manifests:
     - https://raw.githubusercontent.com/randsw/proxmox-capi-talos/main/manifests/coredns-local.yaml        #Kubernetes DNS system
     - https://raw.githubusercontent.com/metallb/metallb/v0.13.9/config/manifests/metallb-native.yaml       #MetalLB deploy
-    #- https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml           #Deploy metrics server
+    - https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml           #Deploy metrics server
     #- https://github.com/fluxcd/flux2/releases/latest/download/install.yaml                                #FluxCD deploy
     #- https://raw.githubusercontent.com/randsw/proxmox-capi-talos/main/manifests/fluxcd-kustomization.yaml #FluxCD kustomization and initialize GitReposytory with manifest to sync
     - https://raw.githubusercontent.com/siderolabs/talos-cloud-controller-manager/main/docs/deploy/cloud-controller-manager.yml # Deploy Talos Cloud-controller 
