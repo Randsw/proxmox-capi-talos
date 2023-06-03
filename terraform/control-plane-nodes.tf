@@ -2,7 +2,7 @@ resource "proxmox_vm_qemu" "controlplanes" {
   count       = 1
   name        = "control-plane-${count.index}"
   target_node = var.target_node_name
-  clone       = var.proxmox_image
+  clone       = join("-",[var.proxmox_image,var.talos_version])
 
   agent                   = 0
   define_connection_info  = false
