@@ -146,3 +146,9 @@ variable "enable_cache_registry" {
   type = bool
   default = false
 }
+
+variable "harbor_admin_password" {
+  description = "Admin password for Harbor container registry"
+  type = string
+  default = "admin"
+}
