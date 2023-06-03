@@ -113,7 +113,7 @@ cluster:
     cni:
       name: custom
       urls:
-        - https://raw.githubusercontent.com/Randsw/proxmox-capi-talos/debug/cilium-hubble/manifests/cilium.yaml
+        - https://raw.githubusercontent.com/Randsw/proxmox-capi-talos/main/manifests/cilium.yaml
   proxy:
     disabled: true
   etcd:
@@ -171,6 +171,12 @@ cluster:
       kind: Namespace
       metadata:
           name: ingress-nginx
+  - name: csi-proxmox # csi-proxmox namespace
+    contents: |- 
+      apiVersion: v1
+      kind: Namespace
+      metadata:
+          name: csi-proxmox
   - name: flux-system-secret # SSH credential to auth in Git # TODO Change to token auth
     contents: |-
       apiVersion: v1
@@ -251,8 +257,8 @@ cluster:
     - https://raw.githubusercontent.com/randsw/proxmox-capi-talos/main/manifests/coredns-local.yaml        #Kubernetes DNS system
     - https://raw.githubusercontent.com/metallb/metallb/v0.13.9/config/manifests/metallb-native.yaml       #MetalLB deploy
     - https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml           #Deploy metrics server
-    #- https://github.com/fluxcd/flux2/releases/latest/download/install.yaml                                #FluxCD deploy
-    #- https://raw.githubusercontent.com/randsw/proxmox-capi-talos/main/manifests/fluxcd-kustomization.yaml #FluxCD kustomization and initialize GitReposytory with manifest to sync
+    - https://github.com/fluxcd/flux2/releases/latest/download/install.yaml                                #FluxCD deploy
+    - https://raw.githubusercontent.com/randsw/proxmox-capi-talos/main/manifests/fluxcd-kustomization.yaml #FluxCD kustomization and initialize GitReposytory with manifest to sync
     - https://raw.githubusercontent.com/siderolabs/talos-cloud-controller-manager/main/docs/deploy/cloud-controller-manager.yml # Deploy Talos Cloud-controller 
     - https://raw.githubusercontent.com/sergelogvinov/proxmox-cloud-controller-manager/main/docs/deploy/cloud-controller-manager-talos.yml # Deploy Proxmox Cloud-controller 
     - https://raw.githubusercontent.com/prometheus-operator/prometheus-operator/v0.65.0/example/prometheus-operator-crd/monitoring.coreos.com_alertmanagerconfigs.yaml # Prometheus operator CRDs
