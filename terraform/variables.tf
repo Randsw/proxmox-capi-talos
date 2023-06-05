@@ -135,20 +135,3 @@ variable "cache_registry_ip" {
   description = "Proxy cache registry ip address"
   type = string
 }
-
-variable "proxmox_registry_image" {
-  description = "Proxy cache registry image template"
-  type = string
-}
-
-variable "enable_cache_registry" {
-  description = "Enable proxy cache container registry deployment"
-  type = bool
-  default = false
-}
-
-variable "harbor_admin_password" {
-  description = "Admin password for Harbor container registry"
-  type = string
-  default = "admin"
-}

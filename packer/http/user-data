@@ -10,8 +10,8 @@ autoinstall:
     ethernets:
       ens18:
         dhcp4: no
-        addresses: [192.168.9.199/24] # Internal proxmox private network
-        gateway4: 192.168.9.2 # Proxmox address in private network
+        addresses: [10.1.1.199/24] # Internal proxmox private network
+        gateway4: 10.1.1.1 # Proxmox address in private network
         nameservers:
           addresses: [8.8.8.8,8.8.4.4]
   locale: en_US
@@ -28,6 +28,7 @@ autoinstall:
     - curl
     - ca-certificates
     - git
+  package_upgrade: false
   storage:
     layout:
       name: direct
@@ -39,11 +40,10 @@ autoinstall:
     timezone: Europe/Moscow
     users:
       - name: ubuntu
-        groups: [adm, sudo] #TODO LEAVE ONLY SUDO AND ADM - LIKE IN QEMU
+        groups: [adm, sudo]
         lock-passwd: false
         sudo: ALL=(ALL) NOPASSWD:ALL
         shell: /bin/bash
         passwd: "$6$xyz$lrzkz89JCrvzOPr56aXfFFqGZpBReOx5ndDu9m5CwVFWjZsEIhvVm.I5B4zMxJdcdTyAvncwjKT.dWcD/ZHIo." # ubuntu
         ssh_authorized_keys:
           - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDBf3E5aZpAAHSPqHv49ktvlHpnjMY11Px+xZsNUUs1Yzi7qWbvDTcTslkcuFeM7++C4De4ARpOGovwByUycFZNfaqcCncaKfzItw6xcEDak9is3R3ln9NdBf5oT7YKQ+jWS8xkx2HRQyeieLTjEIX3sxVSbfwWPkud4y9XJpxniKbhsgpUqz8TqhOpK2p/oIAPqQBK1t4XJ+6qor0gc2r79tlntZoVCsvySjLobXErfHFuwwRSmXc5O7nFySnLX3HPMgbsbWirRBsm4fiXholHL0nYVwd/0xud7hgPgbUpes6znBLgbc/+1ew4jM1L40Qp2gqg7ZiARXZwBo2z22tjxjAOhFoBdbPPxgLF71vS8ZxQaGomXkeW6JUVoUGpqQaVtjPEFHBGkkUzczbp0WQYHTHTOEyRLz4FqlAFTfIrLPS11RR2moXOOFAg61tYWPQBCAVpwdU0c1Kb2RzB9DJ9lFU9h2mp4dGXb5NlnJPUGIhysZHOJLlRDH9mBQEve+U=
-#TODO Check why cloud-init dont rewrite it

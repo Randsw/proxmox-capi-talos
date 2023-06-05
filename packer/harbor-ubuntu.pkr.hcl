@@ -1,12 +1,3 @@
-packer {
-    required_plugins {
-        proxmox = {
-            version = " >= 1.1.0"
-            source  = "github.com/hashicorp/proxmox"
-        }
-    }
-}
-
 # Resource Definiation for the VM Template
 source "proxmox-iso" "harbor-ubuntu-jammy" {
     # Proxmox Connection Settings
@@ -17,10 +8,10 @@ source "proxmox-iso" "harbor-ubuntu-jammy" {
     insecure_skip_tls_verify = true
     
     # VM General Settings
-    node = proxmox_nodename
+    node = var.proxmox_nodename
     vm_id = "999"
     template_name = "harbor-ubuntu"
-    template_description = "Docker Ubuntu Server jammy Image"
+    template_description = "Harbor container registry based on Ubuntu 22.04"
 
     # VM OS Settings
     # (Option 1) Local ISO File
@@ -37,7 +28,7 @@ source "proxmox-iso" "harbor-ubuntu-jammy" {
         type              = "scsi"
         storage_pool      = var.proxmox_storage
         format            = "raw"
-        disk_size         = "4000M"
+        disk_size         = "6000M"
         cache_mode        = "writethrough"
     }
 
@@ -89,7 +80,7 @@ source "proxmox-iso" "harbor-ubuntu-jammy" {
 # Build Definition to create the VM Template
 build {
 
-    name = "harbor-ubuntu-jammy"
+    name = "release"
     sources = ["source.proxmox-iso.harbor-ubuntu-jammy"]
 
     # Provisioning the VM Template for Cloud-Init Integration in Proxmox #1
@@ -132,11 +123,77 @@ build {
 
     provisioner "shell" {
         inline = [
-            "curl https://github.com/goharbor/harbor/releases/download/v2.8.1/harbor-offline-installer-v2.8.1.tgz -o /home/ubuntu/harbor-offline-installer.tgz"
+            "curl https://github.com/goharbor/harbor/releases/download/${var.harbor_version}/harbor-offline-installer-${var.harbor_version}.tgz -o /home/ubuntu/harbor-offline-installer.tgz",
             "tar xzvf harbor-offline-installer.tgz"
         ]
     }
 
+
+    # Delete CD-ROM with autoinstall cloud-init https://github.com/hashicorp/packer-plugin-proxmox/issues/83
+    post-processor "shell-local" {
+        command = "curl -k -X POST -H 'Authorization: PVEAPIToken=${var.proxmox_username}=${var.proxmox_token}' --data-urlencode delete=ide2 ${var.proxmox_url}/nodes/pve/qemu/999/config"
+    }
+    # Delete CD-ROM with ubuntu instalation ISO https://github.com/hashicorp/packer-plugin-proxmox/issues/83
+    post-processor "shell-local" {
+        command = "curl -k -X POST -H 'Authorization: PVEAPIToken=${var.proxmox_username}=${var.proxmox_token}' --data-urlencode delete=ide3 ${var.proxmox_url}/nodes/pve/qemu/999/config"
+    }    
+}
+
+# Build Definition to create the VM Template
+build {
+    name = "develop"
+    sources = ["source.proxmox-iso.harbor-ubuntu-jammy"]
+
+    # Provisioning the VM Template for Cloud-Init Integration in Proxmox #1
+    provisioner "shell" {
+        inline = [
+            "while [ ! -f /var/lib/cloud/instance/boot-finished ]; do echo 'Waiting for cloud-init...'; sleep 1; done",
+            "sudo cloud-init clean",
+            "sudo rm /etc/ssh/ssh_host_*",
+            "sudo truncate -s 0 /etc/machine-id",
+            "sudo sync",
+            "sudo rm /etc/netplan/*.yaml",  # Remove network configuration created by subiquity
+            "sudo rm /etc/cloud/cloud.cfg.d/subiquity-disable-cloudinit-networking.cfg" #Enable network configuration using cloud-init 
+        ]
+    }
+    
+    # Provisioning the VM Template for Cloud-Init Integration in Proxmox #2
+    provisioner "file" {
+        source = "files/99-pve.cfg"
+        destination = "/tmp/99-pve.cfg"
+    }
+
+    # Provisioning the VM Template for Cloud-Init Integration in Proxmox #3
+    provisioner "shell" {
+        inline = [ "sudo cp /tmp/99-pve.cfg /etc/cloud/cloud.cfg.d/99-pve.cfg" ]
+    }
+
+    # Provisioning the VM Template with Docker Installation #4
+    provisioner "shell" {
+        inline = [
+            "sudo apt-get install -y ca-certificates curl gnupg lsb-release",
+            "curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg",
+            "echo \"deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable\" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null",
+            "sudo apt-get -y update",
+            "sudo apt-get install -y docker-ce docker-ce-cli containerd.io",
+            "sudo apt-get install docker-compose-plugin",
+            "sudo usermod -aG docker $USER"
+
+        ]
+    }
+
+    provisioner "file" {
+        source      = "iso/harbor-offline-installer-${var.harbor_version}.tgz"
+        destination = "/tmp/harbor-offline-installer.tgz"
+    }
+
+    provisioner "shell" {
+        inline = [
+            "cp /tmp/harbor-offline-installer.tgz /home/ubuntu/harbor-offline-installer.tgz",
+            "tar xzvf /home/ubuntu/harbor-offline-installer.tgz",
+            "rm /home/ubuntu/harbor-offline-installer.tgz"
+        ]
+    }
 
     # Delete CD-ROM with autoinstall cloud-init https://github.com/hashicorp/packer-plugin-proxmox/issues/83
     post-processor "shell-local" {
