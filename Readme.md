@@ -42,12 +42,18 @@ Prepare infrastructure for Packer
 ### 4. Build Talos Linux image with Packer
 
 Run Packer command:
-    `packer build -only=develop.proxmox-iso.talos -var-file="local.pkrvars.hcl" -var-file="credential.pkrvars.hcl" .`
+
+```shell
+    packer build -only=develop.proxmox-iso.talos -var-file="local.pkrvars.hcl" -var-file="credential.pkrvars.hcl" .
+```
 
 ### 5. Build Harbor container registry image based on Ubuntu 22.04 with Packer (Optional)
 
 Run Packer command:
-    `packer build -only=develop.proxmox-iso.harbor-ubuntu-jammy -var-file="local.pkrvars.hcl" -var-file="credential.pkrvars.hcl" .`
+
+```shell
+    packer build -only=develop.proxmox-iso.harbor-ubuntu-jammy -var-file="local.pkrvars.hcl" -var-file="credential.pkrvars.hcl" .
+```
 
 ### 6. Deploy Harbor container registry on Proxmox (Optional)
 
