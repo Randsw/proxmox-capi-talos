@@ -35,3 +35,8 @@ variable "talos_version" {
 locals {
   image = "https://github.com/talos-systems/talos/releases/download/${var.talos_version}/nocloud-amd64.raw.xz"
 }
+
+variable "harbor_version" {
+  type = string
+  default = "v2.8.1"
+}
