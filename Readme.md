@@ -39,5 +39,29 @@ Prepare infrastructure for Packer
     sudo iptables -t nat -A POSTROUTING -o usb0 -j MASQUERADE
 ```
 
+### 4. Build Talos Linux image with Packer
+
 Run Packer command:
     `packer build -only=develop.proxmox-iso.talos -var-file="local.pkrvars.hcl" -var-file="credential.pkrvars.hcl" .`
+
+### 5. Build Harbor container registry image based on Ubuntu 22.04 with Packer (Optional)
+
+Run Packer command:
+    `packer build -only=develop.proxmox-iso.harbor-ubuntu-jammy -var-file="local.pkrvars.hcl" -var-file="credential.pkrvars.hcl" .`
+
+### 6. Deploy Harbor container registry on Proxmox (Optional)
+
+Run Terraform command:
+
+```shell
+    cd harbor/
+    terraform apply -auto-approve -var-file="credential.tfvars" -var-file="terraform.tfvars"
+```
+
+### 6. Deploy Kaas on Proxmox
+
+Run Terraform command:
+
+```shell
+    terraform apply -auto-approve -var-file="credential.tfvars" -var-file="terraform.tfvars"
+```
