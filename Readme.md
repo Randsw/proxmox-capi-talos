@@ -44,7 +44,7 @@ Prepare infrastructure for Packer
 Run Packer command:
 
 ```shell
-    packer build -only=develop.proxmox-iso.talos -var-file="local.pkrvars.hcl" -var-file="credential.pkrvars.hcl" .
+packer build -only=develop.proxmox-iso.talos -var-file="local.pkrvars.hcl" -var-file="credential.pkrvars.hcl" .
 ```
 
 ### 5. Build Harbor container registry image based on Ubuntu 22.04 with Packer (Optional)
@@ -52,7 +52,7 @@ Run Packer command:
 Run Packer command:
 
 ```shell
-    packer build -only=develop.proxmox-iso.harbor-ubuntu-jammy -var-file="local.pkrvars.hcl" -var-file="credential.pkrvars.hcl" .
+packer build -only=develop.proxmox-iso.harbor-ubuntu-jammy -var-file="local.pkrvars.hcl" -var-file="credential.pkrvars.hcl" .
 ```
 
 ### 6. Deploy Harbor container registry on Proxmox (Optional)
@@ -60,8 +60,8 @@ Run Packer command:
 Run Terraform command:
 
 ```shell
-    cd harbor/
-    terraform apply -auto-approve -var-file="credential.tfvars" -var-file="terraform.tfvars"
+cd harbor/
+terraform apply -auto-approve -var-file="credential.tfvars" -var-file="terraform.tfvars"
 ```
 
 ### 6. Deploy Kaas on Proxmox
@@ -69,5 +69,5 @@ Run Terraform command:
 Run Terraform command:
 
 ```shell
-    terraform apply -auto-approve -var-file="credential.tfvars" -var-file="terraform.tfvars"
+terraform apply -auto-approve -var-file="credential.tfvars" -var-file="terraform.tfvars"
 ```
