@@ -30,13 +30,15 @@ start_proxy_registry() {
 }
 
 stop_proxy_registry() {
-    
-    docker stop registry-docker.io registry-registry.k8s.io registry-gcr.io registry-ghcr.io registry-quay.io
+  docker stop registry-docker.io registry-registry.k8s.io registry-gcr.io registry-ghcr.io registry-quay.io
+}
+
+restart_proxy_registry() {
+  docker start registry-docker.io registry-registry.k8s.io registry-gcr.io registry-ghcr.io registry-quay.io
 }
 
 remove_proxy_registry() {
-
-    docker rm registry-docker.io registry-registry.k8s.io registry-gcr.io registry-ghcr.io registry-quay.io
+  docker rm registry-docker.io registry-registry.k8s.io registry-gcr.io registry-ghcr.io registry-quay.io
 }
 
 
@@ -53,6 +55,9 @@ case "$verb" in
       ;;
     "stop" ) 
       stop_proxy_registry
+      ;;
+    "restart" )
+      restart_proxy_registry
       ;;
     "remove" ) 
       remove_proxy_registry

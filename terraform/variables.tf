@@ -130,8 +130,3 @@ variable "public_key_file_path" {
 variable "known_hosts" {
   type = string
 }
-
-variable "cache_registry_ip" {
-  description = "Proxy cache registry ip address"
-  type = string
-}
