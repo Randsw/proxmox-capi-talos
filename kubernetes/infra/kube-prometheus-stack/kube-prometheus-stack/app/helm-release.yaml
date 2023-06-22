@@ -1,0 +1,62 @@
+piVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: monitoring
+  namespace: monitoring
+spec:
+  interval: 5m
+  chart: 
+    spec: 
+      chart: kube-prometheus-stack
+      version: ">=41.0.0"
+      sourceRef:
+        name: kube-prometheus-stack
+        kind: HelmRepository
+        namespace: flux-system
+  install:
+    crds: CreateReplace
+  upgrade:
+    crds: CreateReplace
+  values:
+    grafana:
+      image:
+        repository: grafana/grafana
+        # tag: 7.5.5 # Some problem with 8.0.0 version. Grafana web interface error
+        # sha: ""
+        # pullPolicy: IfNotPresent
+      ingress:
+          enabled: true
+          ingressClassName: nginx
+          hosts: 
+            - grafana.local
+          path: /
+          pathType: Prefix
+      additionalDataSources:
+        - name: Loki
+          access: proxy
+          type: loki
+          url: http://logging-loki.logging:3100
+    kubeControllerManager:
+      service:
+        targetPort: 10257
+      serviceMonitor:
+        https: true
+        insecureSkipVerify: true
+    kubeScheduler:
+      service:
+        targetPort: 10259
+      serviceMonitor:
+        https: true                                                                                                                                              
+        insecureSkipVerify: true
+    kubeEtcd:
+      service:
+        targetPort: 2381
+    alertmanager:
+      ingress:
+          enabled: true
+          ingressClassName: nginx
+          hosts: 
+            - alertmanager.local
+          path: 
+            - /
+          pathType: Prefix

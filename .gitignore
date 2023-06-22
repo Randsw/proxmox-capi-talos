@@ -39,3 +39,5 @@ terraform.rc
 
 talosconfig
 kubeconfig
+
+.vscode

@@ -1,0 +1,11 @@
+---
+# yaml-language-server: $schema=https://json.schemastore.org/kustomization
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - ./ingress-nginx.yaml
+  - ./kube-prometheus-stack.yaml
+  - ./proxmox-operator.yaml
+  - ./loki.yaml
+  - ./metrics-server.yaml
+  - ./sealed-secret.yaml

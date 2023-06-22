@@ -1,0 +1,20 @@
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: px-operator
+  namespace: flux-system
+spec:
+  path: ./kubernetes/infra/proxmox/operator/app
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: proxmox-capi-talos
+  interval: 5m
+  retryInterval: 1m
+  timeout: 3m
+  postBuild:
+    substituteFrom:
+      - kind: ConfigMap
+        name: cluster-settings
+        optional: false
