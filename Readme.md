@@ -2,6 +2,10 @@
 
 Inspired by [Kubernetes As a Service (KAAS) in Proxmox](https://github.com/kubebn/talos-proxmox-kaas)
 
+An attempt to adapt this solution to the air-gapped architecture.
+
+All the necessary images are stored in the Harbor, which is located in the inner contour.
+
 ## Packer command
 
 Prepare infrastructure for Packer
