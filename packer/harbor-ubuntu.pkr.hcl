@@ -9,7 +9,7 @@ source "proxmox-iso" "harbor-ubuntu-jammy" {
     
     # VM General Settings
     node = var.proxmox_nodename
-    vm_id = "999"
+    vm_id = "599"
     template_name = "harbor-ubuntu"
     template_description = "Harbor container registry based on Ubuntu 22.04"
 
@@ -47,7 +47,7 @@ source "proxmox-iso" "harbor-ubuntu-jammy" {
 
     # VM Cloud-Init Settings
     cloud_init = true
-    cloud_init_storage_pool = "local-lvm"
+    cloud_init_storage_pool = "local"
 
     boot_key_interval = "50ms"
     boot_wait = "6s"
@@ -131,11 +131,11 @@ build {
 
     # Delete CD-ROM with autoinstall cloud-init https://github.com/hashicorp/packer-plugin-proxmox/issues/83
     post-processor "shell-local" {
-        command = "curl -k -X POST -H 'Authorization: PVEAPIToken=${var.proxmox_username}=${var.proxmox_token}' --data-urlencode delete=ide2 ${var.proxmox_url}/nodes/pve/qemu/999/config"
+        command = "curl -k -X POST -H 'Authorization: PVEAPIToken=${var.proxmox_username}=${var.proxmox_token}' --data-urlencode delete=ide2 ${var.proxmox_url}/nodes/pve/qemu/${var.vm_id}/config"
     }
     # Delete CD-ROM with ubuntu instalation ISO https://github.com/hashicorp/packer-plugin-proxmox/issues/83
     post-processor "shell-local" {
-        command = "curl -k -X POST -H 'Authorization: PVEAPIToken=${var.proxmox_username}=${var.proxmox_token}' --data-urlencode delete=ide3 ${var.proxmox_url}/nodes/pve/qemu/999/config"
+        command = "curl -k -X POST -H 'Authorization: PVEAPIToken=${var.proxmox_username}=${var.proxmox_token}' --data-urlencode delete=ide3 ${var.proxmox_url}/nodes/pve/qemu/${var.vm_id}/config"
     }    
 }
 

@@ -10,7 +10,7 @@ spec:
   prune: true
   sourceRef:
     kind: GitRepository
-    name: px-kaas
+    name: proxmox-capi-talos
   postBuild:
     substituteFrom:
       - kind: ConfigMap

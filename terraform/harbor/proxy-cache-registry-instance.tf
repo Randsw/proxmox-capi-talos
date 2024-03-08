@@ -36,7 +36,7 @@ resource "proxmox_vm_qemu" "container-registry" {
     backup  = false
     #https://github.com/Telmate/terraform-provider-proxmox/issues/704
     file    = "vm-${var.harbor_vmid}-disk-0"
-    volume  = "local-lvm:vm-${var.harbor_vmid}-disk-0"
+    volume  = "local-zfs:vm-${var.harbor_vmid}-disk-0"
   }
   lifecycle {
     ignore_changes = [

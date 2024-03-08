@@ -29,6 +29,18 @@ variable "cluster_name" {
   default     = "mgmt-cluster"
 }
 
+variable "cp_vmid" {
+  description = "Controlplane proxmox vm id start number"
+  type = number
+  default = 510
+}
+
+variable "worker_vmid" {
+  description = "Worker proxmox vm id start number"
+  type = number
+  default = 514
+}
+
 variable "region" {
   description = "Equal to Proxmox cluster name"
   type        = string
@@ -101,12 +113,12 @@ variable "worker_first_ip" {
 variable "vpc_main_cidr" {
   description = "Local proxmox subnet"
   type        = string
-  default     = "10.1.1.0/24"
+  default     = "10.10.10.0/24"
 }
 
 variable "gateway" {
   type    = string
-  default = "10.1.1.1"
+  default = "10.10.10.1"
 }
 
 variable "target_node_name" {

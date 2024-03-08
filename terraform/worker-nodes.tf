@@ -1,8 +1,9 @@
 resource "proxmox_vm_qemu" "workers" {
-  count       = 1
+  count       = 3
   name        = "worker-${count.index}"
   target_node = var.target_node_name_worker
   clone       = join("-",[var.proxmox_image,var.talos_version])
+  vmid        = var.worker_vmid +  count.index
 
   agent                   = 0
   define_connection_info  = false
@@ -37,7 +38,7 @@ resource "proxmox_vm_qemu" "workers" {
   disk {
     type    = "scsi"
     storage = var.proxmox_storage1
-    size    = "15G"
+    size    = "30G"
     cache   = "writethrough"
     ssd     = 1
     backup  = false

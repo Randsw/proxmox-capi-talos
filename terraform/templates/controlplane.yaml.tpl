@@ -85,24 +85,24 @@ machine:
     mirrors:
       docker.io:
         endpoints:
-          - http://${registry-endpoint}:5000
-        #overridePath: true
+          - http://${registry-endpoint}:80/v2/proxy-docker.io
+        overridePath: true
       ghcr.io:
         endpoints:
-          - http://${registry-endpoint}:5004
-        #overridePath: true
+          - http://${registry-endpoint}:80/v2/proxy-ghcr.io
+        overridePath: true
       gcr.io:
         endpoints:
-          - http://${registry-endpoint}:5003
-        #overridePath: true
+          - http://${registry-endpoint}:80/v2/proxy-gcr.io
+        overridePath: true
       registry.k8s.io:
         endpoints:
-          - http://${registry-endpoint}:5001
-        #overridePath: true
+          - http://${registry-endpoint}:80/v2/proxy-registry.k8s.io
+        overridePath: true
       quay.io:
         endpoints:
-          - http://${registry-endpoint}:5005
-        #overridePath: true
+          - http://${registry-endpoint}:80/v2/proxy-quay.io
+        overridePath: true
 cluster:
   controlPlane:
     endpoint: https://${apiDomain}:6443

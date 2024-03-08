@@ -14,6 +14,7 @@ source "proxmox-iso" "talos" {
   token                    = var.proxmox_token
   node                     = var.proxmox_nodename
   insecure_skip_tls_verify = true
+  vm_id = "598"
 
   iso_file    = "local:iso/archlinux-2023.04.01-x86_64.iso"
   unmount_iso = true
@@ -35,7 +36,8 @@ source "proxmox-iso" "talos" {
   ssh_username = "root"
   ssh_password = "packer"
   ssh_timeout  = "15m"
-  qemu_agent   = true
+  ssh_host     = var.static_ip
+  qemu_agent   = false
 
   template_name        = "talos-${var.talos_version}"
   template_description = "Talos system disk"
@@ -45,8 +47,11 @@ source "proxmox-iso" "talos" {
 
   boot_command = [
     "<enter><wait1m>",
+    "systemctl stop dhcpcd<enter><wait>",
+    "ip route flush 0/0<enter><wait>",
     "passwd<enter><wait>packer<enter><wait>packer<enter>",
-    "ip address add ${var.static_ip} broadcast + dev ens18<enter><wait>",
+    "ip addr flush dev ens18<enter><wait>",
+    "ip address add ${var.static_ip}/24 broadcast + dev ens18<enter><wait>",
     "ip route add 0.0.0.0/0 via ${var.gateway} dev ens18<enter><wait>"
   ]
 }
