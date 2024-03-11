@@ -9,3 +9,4 @@ resources:
   - ./loki.yaml
   - ./metrics-server.yaml
   - ./sealed-secret.yaml
+  - ./jetstack.yaml
