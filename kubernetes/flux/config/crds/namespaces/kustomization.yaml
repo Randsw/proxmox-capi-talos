@@ -4,6 +4,4 @@ resources:
   - monitoring-namespace.yaml
   - ingress-nginx-namespace.yaml
   - logging-namespace.yaml
-  - gitlab-runner-namespace.yaml
-  - football-api.yaml
   - local-path-provisioner-namespace.yaml
