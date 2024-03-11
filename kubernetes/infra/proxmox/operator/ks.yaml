@@ -10,6 +10,7 @@ spec:
   sourceRef:
     kind: GitRepository
     name: proxmox-capi-talos
+    namespace: flux-system
   interval: 5m
   retryInterval: 1m
   timeout: 3m
