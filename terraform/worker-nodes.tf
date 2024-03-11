@@ -1,6 +1,6 @@
 resource "proxmox_vm_qemu" "workers" {
   count       = 3
-  name        = "worker-${count.index}"
+  name        = "mgmt-worker-${count.index}"
   target_node = var.target_node_name_worker
   clone       = join("-",[var.proxmox_image,var.talos_version])
   vmid        = var.worker_vmid +  count.index
