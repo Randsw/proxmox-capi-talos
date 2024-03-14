@@ -8,7 +8,7 @@ spec:
   cluster: pve
   node: pve ### If not set it will set automaticly from "pool"
   vmid: 550  ### If not set it will set automaticly
-  #clone: "talos-v1.4.5"
+  clone: "talos-v1.4.5"
   #pool: prod ### Cluster pool for place VM
   anti-affinity: "" ### The anti-affinity group. VM's with same anti-affinity group will be placed on different nodes
   autostart: true
@@ -58,7 +58,7 @@ spec:
   cluster: pve
   node: pve ### If not set it will set automaticly from "pool"
   vmid: 551  ### If not set it will set automaticly
-  #clone: "talos-v1.4.5"
+  clone: "talos-v1.4.5"
   #pool: prod ### Cluster pool for place VM
   anti-affinity: "" ### The anti-affinity group. VM's with same anti-affinity group will be placed on different nodes
   autostart: true
