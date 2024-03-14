@@ -8,7 +8,7 @@ spec:
   dependsOn:
     - name: sidero
     - name: px-operator
-  path: ./kubernetes/apps/clusters/cluster-0/manifests
+  path: ./kubernetes/infra/clusters/cluster-0/manifests
   prune: true
   sourceRef:
     kind: GitRepository
