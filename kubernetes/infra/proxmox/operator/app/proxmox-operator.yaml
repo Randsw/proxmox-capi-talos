@@ -158,6 +158,12 @@ rules:
       - ""
     resources:
       - 'pods'
+  - verbs:
+      - '*'
+    apiGroups:
+      - "coordination.k8s.io"
+    resources:
+      - 'leases'
 ---
 # Source: proxmox-operator/templates/serviceaccount.yaml
 kind: ClusterRoleBinding
