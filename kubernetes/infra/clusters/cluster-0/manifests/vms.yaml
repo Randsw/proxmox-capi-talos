@@ -5,7 +5,7 @@ metadata:
   finalizers:
     - resources-finalizer.proxmox-operator.xfix.org
 spec:
-  cluster: cluster-1
+  #cluster: cluster-1
   node: pve ### If not set it will set automaticly from "pool"
   vmid: 550  ### If not set it will set automaticly
   #clone: "talos-v1.4.5"
@@ -55,7 +55,7 @@ metadata:
   finalizers:
     - resources-finalizer.proxmox-operator.xfix.org
 spec:
-  cluster: cluster-1
+  #cluster: cluster-1
   node: pve ### If not set it will set automaticly from "pool"
   vmid: 551  ### If not set it will set automaticly
   #clone: "talos-v1.4.5"
