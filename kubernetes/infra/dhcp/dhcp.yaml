@@ -29,12 +29,12 @@ stringData:
     update-conflict-detection true;
     subnet 10.244.0.0 netmask 255.255.0.0 {
     }
-    subnet 10.1.1.0 netmask 255.255.255.0 {
-      range 10.1.1.50 10.1.1.180;
+    subnet 10.10.10.0 netmask 255.255.255.0 {
+      range 10.10.10.205 10.10.10.235;
       option subnet-mask 255.255.255.0;
-      option broadcast-address 10.1.1.250;
-      option routers 10.1.1.1;
-      option domain-name-servers 1.1.1.1, 1.0.0.1;
+      option broadcast-address 10.10.10.250;
+      option routers 10.10.10.1;
+      option domain-name-servers 1.1.1.1, 8.8.8.8;
       option domain-name "weecodelab.nl";
       default-lease-time 600;
       max-lease-time 7200;
