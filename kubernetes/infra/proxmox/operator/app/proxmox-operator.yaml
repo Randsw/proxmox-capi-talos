@@ -152,6 +152,12 @@ rules:
       - proxmox.xfix.org
     resources:
       - '*'
+  - verbs:
+      - '*'
+    apiGroups:
+      - ""
+    resources:
+      - 'pods'
 ---
 # Source: proxmox-operator/templates/serviceaccount.yaml
 kind: ClusterRoleBinding
