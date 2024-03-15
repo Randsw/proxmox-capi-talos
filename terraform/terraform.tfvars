@@ -25,9 +25,9 @@ kubernetes = {
   ipv4_vip                = "10.10.10.200"           # vip ip address
   apiDomain               = "api.cluster.local"   # cluster endpoint
   talos-version           = "v1.4.5"              # talos installer version
-  metallb_l2_addressrange = "10.10.10.130-10.10.10.135" # metallb L2 configuration ip range
+  metallb_l2_addressrange = "10.10.10.130-10.10.10.145" # metallb L2 configuration ip range
   registry-endpoint       = "10.10.10.201"
   # FLUX ConfigMap settings
-  sidero-endpoint = "10.10.10.30"
-  cluster-0-vip   = "10.10.10.40"
+  sidero-endpoint = "10.10.10.135"
+  cluster-0-vip   = "10.10.10.140"
 }
