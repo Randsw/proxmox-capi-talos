@@ -9,7 +9,7 @@ spec:
   qualifiers:
     cpu:
       - manufacturer: QEMU
-        version: pc-i440fx-7.2
+        version: pc-i440fx-7.1
     # labelSelectors:
     #   - "master-dev": "true"
   configPatches:
