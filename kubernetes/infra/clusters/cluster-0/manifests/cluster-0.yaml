@@ -41,7 +41,7 @@ spec:
       serverClassRef:
         apiVersion: metal.sidero.dev/v1alpha1
         kind: ServerClass
-        name: any
+        name: master-cluster-0
 ---
 apiVersion: controlplane.cluster.x-k8s.io/v1alpha3
 kind: TalosControlPlane
@@ -106,4 +106,4 @@ spec:
       serverClassRef:
         apiVersion: metal.sidero.dev/v1alpha1
         kind: ServerClass
-        name: any
+        name: worker-cluster-0
