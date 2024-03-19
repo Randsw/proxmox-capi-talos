@@ -5,7 +5,7 @@ metadata:
 spec:
   qualifiers:
     cpu:
-     -  manufacturer: QEMU
+      - manufacturer: QEMU
         version: pc-i440fx-7.2
     labelSelectors:
       - "worker-dev": "true"
@@ -13,11 +13,11 @@ spec:
     - op: add
       path: /machine/network/interfaces
       value:
-         - interface: eth0
-           dhcp: true
-         - interface: dummy0
-           addresses:
-             - 169.254.2.53/32
+        - interface: eth0
+          dhcp: true
+        - interface: dummy0
+          addresses:
+            - 169.254.2.53/32
     - op: add
       path: /machine/network/extraHostEntries
       value:
