@@ -41,3 +41,5 @@ talosconfig
 kubeconfig
 
 .vscode
+
+test-pod.yaml

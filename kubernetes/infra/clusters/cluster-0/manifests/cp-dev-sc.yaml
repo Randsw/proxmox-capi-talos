@@ -3,12 +3,15 @@ kind: ServerClass
 metadata:
   name: master-cluster-0
 spec:
+  selector:
+    matchLabels:
+      master-dev: "true"
   qualifiers:
     cpu:
      -  manufacturer: QEMU
         version: pc-i440fx-7.2
-    labelSelectors:
-      - "master-dev": "true"
+    # labelSelectors:
+    #   - "master-dev": "true"
   configPatches:
     - op: add
       path: /machine/network/interfaces
@@ -30,7 +33,7 @@ spec:
       path: /machine/network/nameservers
       value:
         - 1.1.1.1
-        - 1.0.0.1
+        - 8.8.8.8
     - op: replace
       path: /machine/install
       value:
