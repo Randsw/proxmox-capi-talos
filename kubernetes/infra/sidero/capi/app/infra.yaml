@@ -2786,7 +2786,7 @@ spec:
         - --insecure-wipe=true
         - --auto-bmc-setup=false
         - --server-reboot-timeout=20m
-        - --ipmi-pxe-method=uefi
+        - --ipmi-pxe-method=bios
         - --test-power-simulated-explicit-failure-prob=0
         - --test-power-simulated-silent-failure-prob=0
         command:

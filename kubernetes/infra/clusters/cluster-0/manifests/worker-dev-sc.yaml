@@ -28,7 +28,7 @@ spec:
       path: /machine/network/nameservers
       value:
         - 1.1.1.1
-        - 1.0.0.1
+        - 8.8.8.8
     - op: replace
       path: /machine/install
       value:
