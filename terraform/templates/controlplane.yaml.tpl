@@ -250,7 +250,8 @@ cluster:
         SIDERO_ENDPOINT: ${sidero-endpoint}
         STORAGE_CLASS: ${storageclass}
         STORAGE_CLASS_XFS: ${storageclass-xfs}
-        CLUSTER_0_VIP: ${cluster-0-vip} 
+        CLUSTER_0_VIP: ${cluster-0-vip}
+        CACHE_REGISTRY: ${registry-endpoint}
   externalCloudProvider:
     enabled: true
     manifests:

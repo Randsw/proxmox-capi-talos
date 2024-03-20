@@ -1,0 +1,9 @@
+---
+# yaml-language-server: $schema=https://json.schemastore.org/kustomization
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - ./cluster-flux.yaml
+  - ./cp-flux-sc.yaml
+  - ./worker-flux-sc.yaml
+  - ./vms.yaml

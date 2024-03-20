@@ -1,0 +1,114 @@
+apiVersion: metal.sidero.dev/v1alpha2
+kind: ServerClass
+metadata:
+  name: control-plane-cluster-flux
+spec:
+  selector:
+    matchLabels:
+      master-dev: "true"
+  qualifiers:
+    cpu:
+      - manufacturer: QEMU
+        version: pc-i440fx-7.1
+    # labelSelectors:
+    #   - "master-dev": "true"
+  configPatches:
+    - op: add
+      path: /machine/network/interfaces
+      value:
+        - interface: eth0
+          dhcp: true
+          vip:
+            ip: "${CLUSTER_0_VIP}"
+        - interface: dummy0
+          addresses:
+            - 169.254.2.53/32
+    - op: add
+      path: /machine/network/extraHostEntries
+      value:
+        - ip: 127.0.0.1
+          aliases:
+            - api.cluster.local
+    - op: add
+      path: /machine/network/nameservers
+      value:
+        - 1.1.1.1
+        - 8.8.8.8
+    - op: replace
+      path: /machine/install
+      value:
+        disk: /dev/sda
+        extraKernelArgs: ['elevator=noop']
+    - op: replace
+      path: /cluster/network/cni
+      value:
+        name: "custom"
+        urls:
+          - "https://raw.githubusercontent.com/Randsw/proxmox-capi-talos/main/manifests/cilium.yaml"
+    - op: replace
+      path: /cluster/proxy
+      value:
+        disabled: true
+    - op: replace
+      path: /machine/kubelet/extraArgs
+      value:
+        rotate-server-certificates: true
+    - op: replace
+      path: /machine/kubelet/clusterDNS
+      value:
+        - 169.254.2.53
+        - 10.96.0.10
+    - op: replace
+      path: /cluster/inlineManifests
+      value:
+        - name: cilium
+          contents: |- 
+            apiVersion: v1
+            kind: Namespace
+            metadata:
+                name: cilium
+                labels:
+                  pod-security.kubernetes.io/enforce: "privileged"
+        - name: cilium
+          contents: |- 
+            apiVersion: v1
+            kind: ConfigMap
+            metadata:
+              namespace: flux-system
+              name: cluster-settings
+            data:
+              SIDERO_ENDPOINT: 10.10.10.135
+              CLUSTER_0_VIP: 10.10.10.141
+              CACHE_REGISTRY: 10.10.10.201
+    - op: replace
+      path: /cluster/extraManifests
+      value:
+        - https://raw.githubusercontent.com/Randsw/proxmox-capi-talos/main/manifests/cert-approval.yaml
+        - https://raw.githubusercontent.com/Randsw/proxmox-capi-talos/main/manifests/coredns-local.yaml
+        - https://raw.githubusercontent.com/metallb/metallb/v0.13.9/config/manifests/metallb-native.yaml 
+        - https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml
+        - https://github.com/fluxcd/flux2/releases/latest/download/install.yaml
+        - https://raw.githubusercontent.com/Randsw/proxmox-capi-talos/main/kubernetes/infra/clusters/cluster-flux/manifests/fluxcd-kustomization.yaml
+    - op: replace
+      path: /machine/registries/mirrors
+      value:
+        docker.io:
+          endpoints:
+            - http://10.10.10.201:80/v2/proxy-docker.io
+          overridePath: true
+        ghcr.io:
+          endpoints:
+            - http://10.10.10.201:80/v2/proxy-ghcr.io
+          overridePath: true
+        gcr.io:
+          endpoints:
+            - http://10.10.10.201:80/v2/proxy-gcr.io
+          overridePath: true
+        registry.k8s.io:
+          endpoints:
+            - http://10.10.10.201:80/v2/proxy-registry.k8s.io
+          overridePath: true
+        quay.io:
+          endpoints:
+            - http://10.10.10.201:80/v2/proxy-quay.io
+          overridePath: true

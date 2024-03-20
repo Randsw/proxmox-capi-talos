@@ -2782,7 +2782,7 @@ spec:
         - --http-port=8081
         - --extra-agent-kernel-args=-
         - --boot-from-disk-method=ipxe-exit
-        - --auto-accept-servers=false
+        - --auto-accept-servers=true
         - --insecure-wipe=true
         - --auto-bmc-setup=true
         - --server-reboot-timeout=20m
