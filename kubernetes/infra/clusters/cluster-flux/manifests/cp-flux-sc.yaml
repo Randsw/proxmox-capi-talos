@@ -5,7 +5,7 @@ metadata:
 spec:
   selector:
     matchLabels:
-      master-dev: "true"
+      cp-dev: "true"
   qualifiers:
     cpu:
       - manufacturer: QEMU
