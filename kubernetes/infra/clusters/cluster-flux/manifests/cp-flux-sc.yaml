@@ -7,11 +7,11 @@ spec:
     matchLabels:
       cp-dev: "true"
   qualifiers:
-    cpu:
-      - manufacturer: QEMU
-        version: pc-i440fx-7.1
-    # labelSelectors:
-    #   - "master-dev": "true"
+    Hardware:
+      Compute:
+        Processors:
+          Manufacturer:  QEMU
+          Product Name:  pc-i440fx-7.1
   configPatches:
     - op: add
       path: /machine/network/interfaces
