@@ -31,7 +31,7 @@ spec:
       size: 40G
   tags:
     - sidero
-    - cluster-0
+    - cluster-flux
   options:
     ostype: "l26"
     bios: "seabios"
@@ -80,7 +80,7 @@ spec:
       size: 40G
   tags:
     - sidero
-    - cluster-0
+    - cluster-flux
   options:
     ostype: "l26"
     bios: "seabios"
@@ -129,7 +129,7 @@ spec:
       size: 40G
   tags:
     - sidero
-    - cluster-0
+    - cluster-flux
   options:
     ostype: "l26"
     bios: "seabios"
@@ -178,7 +178,7 @@ spec:
       size: 40G
   tags:
     - sidero
-    - cluster-0
+    - cluster-flux
   options:
     ostype: "l26"
     bios: "seabios"
