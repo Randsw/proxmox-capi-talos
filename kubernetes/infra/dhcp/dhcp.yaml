@@ -111,7 +111,7 @@ spec:
             runAsGroup: 0
             runAsNonRoot: false
             runAsUser: 0
-          image: "crashntech/talos-dhcp-server:0.0.9"
+          image: "crashntech/talos-dhcp-server:0.1.1"
           imagePullPolicy: IfNotPresent
           volumeMounts: 
             - mountPath: /var/lib/dhcp/
