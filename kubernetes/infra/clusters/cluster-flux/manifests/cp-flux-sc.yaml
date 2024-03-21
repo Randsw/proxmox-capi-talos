@@ -69,7 +69,7 @@ spec:
                 name: cilium
                 labels:
                   pod-security.kubernetes.io/enforce: "privileged"
-        - name: cilium
+        - name: flux-vars
           contents: |- 
             apiVersion: v1
             kind: ConfigMap
