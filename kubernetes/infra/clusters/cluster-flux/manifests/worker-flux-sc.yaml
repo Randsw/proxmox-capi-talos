@@ -5,7 +5,7 @@ metadata:
 spec:
   selector:
     matchLabels:
-      worker-dev: "true"
+      worker-flux: "true"
   qualifiers:
     hardware:
       - compute:

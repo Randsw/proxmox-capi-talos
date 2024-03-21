@@ -76,7 +76,6 @@ spec:
               name: cluster-settings
             data:
               SIDERO_ENDPOINT: 10.10.10.135
-              CLUSTER_0_VIP: 10.10.10.141
               CACHE_REGISTRY: 10.10.10.201
     - op: replace
       path: /cluster/extraManifests
