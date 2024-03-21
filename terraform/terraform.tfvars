@@ -30,4 +30,5 @@ kubernetes = {
   # FLUX ConfigMap settings
   sidero-endpoint = "10.10.10.135"
   cluster-0-vip   = "10.10.10.140"
+  cluster-flux-vip   = "10.10.10.141"
 }

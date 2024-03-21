@@ -20,6 +20,7 @@ variable "kubernetes" {
     storageclass            = ""
     storageclass-xfs        = ""
     cluster-0-vip           = ""
+    cluster-flux-vip        = ""
   }
 }
 

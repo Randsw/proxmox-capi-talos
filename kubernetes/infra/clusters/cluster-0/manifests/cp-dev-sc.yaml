@@ -81,7 +81,7 @@ spec:
       value:
         docker.io:
           endpoints:
-            - http://10.10.10.201:80/v2/proxy-docker.io
+            - http://10.10.10.201:80/v2/proxy-docker.io # CACHE-REGISTRY
           overridePath: true
         ghcr.io:
           endpoints:

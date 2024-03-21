@@ -251,6 +251,7 @@ cluster:
         STORAGE_CLASS: ${storageclass}
         STORAGE_CLASS_XFS: ${storageclass-xfs}
         CLUSTER_0_VIP: ${cluster-0-vip}
+        CLUSTER_0_VIP: ${cluster-flux-vip}
         CACHE_REGISTRY: ${registry-endpoint}
   externalCloudProvider:
     enabled: true

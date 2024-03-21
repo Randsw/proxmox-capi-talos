@@ -18,6 +18,8 @@ spec:
       value:
         - interface: eth0
           dhcp: true
+          vip:
+            ip: 10.10.10.141 #"${CLUSTER_FLUX_VIP}"
         - interface: dummy0
           addresses:
             - 169.254.2.53/32
@@ -67,16 +69,6 @@ spec:
                 name: cilium
                 labels:
                   pod-security.kubernetes.io/enforce: "privileged"
-        - name: flux-vars
-          contents: |- 
-            apiVersion: v1
-            kind: ConfigMap
-            metadata:
-              namespace: flux-system
-              name: cluster-settings
-            data:
-              SIDERO_ENDPOINT: 10.10.10.135
-              CACHE_REGISTRY: 10.10.10.201
     - op: replace
       path: /cluster/extraManifests
       value:
@@ -91,7 +83,7 @@ spec:
       value:
         docker.io:
           endpoints:
-            - http://10.10.10.201:80/v2/proxy-docker.io
+            - http://10.10.10.201:80/v2/proxy-docker.io # CACHE-REGISTRY
           overridePath: true
         ghcr.io:
           endpoints:
