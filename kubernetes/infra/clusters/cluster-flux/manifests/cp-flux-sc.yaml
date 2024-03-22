@@ -14,10 +14,6 @@ spec:
               productName:  pc-i440fx-7.1
   configPatches:
     - op: add
-      path: /machine/network/hostname
-      value:
-        hostname: contol-plane-flux-1
-    - op: add
       path: /machine/network/interfaces
       value:
         - interface: eth0
