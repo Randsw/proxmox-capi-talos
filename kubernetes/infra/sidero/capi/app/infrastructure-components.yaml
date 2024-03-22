@@ -3712,7 +3712,7 @@ spec:
           valueFrom:
             fieldRef:
               fieldPath: status.hostIP
-        image: ghcr.io/siderolabs/sidero-controller-manager:v0.6.3
+        image: ghcr.io/siderolabs/sidero-controller-manager:v0.6.0
         imagePullPolicy: Always
         livenessProbe:
           httpGet:

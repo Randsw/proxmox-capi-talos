@@ -3,11 +3,11 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
   # Pre Flux-Kustomizations
-  - ./cluster-api-components.yaml
+  - ./cluster-api-components_old.yaml
   - ./bootstrap.yaml
-  #- ./controlplane.yaml
-  #- ./infra.yaml
-  - ./infrastructure-components.yaml
+  - ./controlplane_old.yaml
+  - ./infra_old.yaml
+  #- ./infrastructure-components.yaml
   - ./metallb.yaml
   #- https://github.com/siderolabs/cluster-api-bootstrap-provider-talos/releases/download/v0.6.4/bootstrap-components.yaml
-  - https://github.com/siderolabs/cluster-api-control-plane-provider-talos/releases/download/v0.5.5/control-plane-components.yaml
+  #- https://github.com/siderolabs/cluster-api-control-plane-provider-talos/releases/download/v0.5.5/control-plane-components.yaml
