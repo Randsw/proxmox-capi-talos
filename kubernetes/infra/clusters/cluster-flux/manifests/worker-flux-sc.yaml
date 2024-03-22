@@ -24,7 +24,7 @@ spec:
     - op: add
       path: /machine/network/extraHostEntries
       value:
-        - ip: 10.10.10.141 #"${CLUSTER_0_VIP}"
+        - ip: 10.10.10.141
           aliases:
             - api.cluster.local
     - op: add
@@ -55,7 +55,7 @@ spec:
       value:
         docker.io:
           endpoints:
-            - http://10.10.10.201:80/v2/proxy-docker.io # CACHE-REGISTRY
+            - http://10.10.10.201:80/v2/proxy-docker.io
           overridePath: true
         ghcr.io:
           endpoints:

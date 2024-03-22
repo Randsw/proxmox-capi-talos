@@ -23,7 +23,7 @@ spec:
         - interface: eth0
           dhcp: true
           vip:
-            ip: 10.10.10.141 #"${CLUSTER_FLUX_VIP}"
+            ip: 10.10.10.141
         - interface: dummy0
           addresses:
             - 169.254.2.53/32
@@ -73,7 +73,7 @@ spec:
                 name: cilium
                 labels:
                   pod-security.kubernetes.io/enforce: "privileged"
-        - name: fluxcd # Flux CD namespace
+        - name: fluxcd
           contents: |- 
             apiVersion: v1
             kind: Namespace
@@ -98,7 +98,7 @@ spec:
       value:
         docker.io:
           endpoints:
-            - http://10.10.10.201:80/v2/proxy-docker.io # CACHE-REGISTRY
+            - http://10.10.10.201:80/v2/proxy-docker.io
           overridePath: true
         ghcr.io:
           endpoints:
