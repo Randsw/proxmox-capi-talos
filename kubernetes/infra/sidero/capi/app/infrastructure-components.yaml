@@ -3712,7 +3712,7 @@ spec:
           valueFrom:
             fieldRef:
               fieldPath: status.hostIP
-        image: ghcr.io/siderolabs/sidero-controller-manager:v0.6.0
+        image: ghcr.io/siderolabs/sidero-controller-manager:v0.6.3
         imagePullPolicy: Always
         livenessProbe:
           httpGet:
@@ -3754,7 +3754,7 @@ spec:
           name: cert
           readOnly: true
       - args:
-        - --wireguard-endpoint=${SIDERO_CONTROLLER_MANAGER_SIDEROLINK_ENDPOINT:=-}
+        - --wireguard-endpoint=${SIDERO_ENDPOINT}
         - --wireguard-port=${SIDERO_CONTROLLER_MANAGER_SIDEROLINK_PORT:=51821}
         command:
         - /siderolink-manager
