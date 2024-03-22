@@ -24,7 +24,7 @@ spec:
     - op: add
       path: /machine/network/extraHostEntries
       value:
-        - ip: 10.10.10.141
+        - ip: "${CLUSTER_FLUX_VIP}"
           aliases:
             - api.cluster.local
     - op: add
