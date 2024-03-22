@@ -153,12 +153,6 @@ cluster:
       kind: Namespace
       metadata:
           name: external-dns
-  - name: kasten # Kasten namespace
-    contents: |- 
-      apiVersion: v1
-      kind: Namespace
-      metadata:
-          name: kasten-io
   - name: cert-manager # Cert-manager namespace
     contents: |- 
       apiVersion: v1
