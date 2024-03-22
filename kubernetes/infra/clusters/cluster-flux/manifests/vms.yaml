@@ -17,8 +17,8 @@ spec:
     sockets: 1
     cores: 2
   memory:
-    size: 4096
-    balloon: 4096
+    size: 8192
+    balloon: 8192
   network:
     net0:
       model: virtio
