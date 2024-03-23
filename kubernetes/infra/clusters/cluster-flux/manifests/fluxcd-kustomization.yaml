@@ -139,7 +139,7 @@ metadata:
   namespace: flux-system
 spec:
   interval: 5m
-  path: ./cluster-flux
+  path: ./cluster-flux/flux
   prune: true
   sourceRef:
     kind: GitRepository
