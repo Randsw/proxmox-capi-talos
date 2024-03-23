@@ -52,21 +52,21 @@ spec:
       value:
         docker.io:
           endpoints:
-            - http://10.10.10.201:80/v2/proxy-docker.io
+            - http://${CACHE_REGISTRY}:80/v2/proxy-docker.io
           overridePath: true
         ghcr.io:
           endpoints:
-            - http://10.10.10.201:80/v2/proxy-ghcr.io
+            - http://${CACHE_REGISTRY}:80/v2/proxy-ghcr.io
           overridePath: true
         gcr.io:
           endpoints:
-            - http://10.10.10.201:80/v2/proxy-gcr.io
+            - http://${CACHE_REGISTRY}:80/v2/proxy-gcr.io
           overridePath: true
         registry.k8s.io:
           endpoints:
-            - http://10.10.10.201:80/v2/proxy-registry.k8s.io
+            - http://${CACHE_REGISTRY}:80/v2/proxy-registry.k8s.io
           overridePath: true
         quay.io:
           endpoints:
-            - http://10.10.10.201:80/v2/proxy-quay.io
+            - http://${CACHE_REGISTRY}:80/v2/proxy-quay.io
           overridePath: true
