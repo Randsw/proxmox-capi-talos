@@ -3,17 +3,19 @@ kind: ServerClass
 metadata:
   name: worker-cluster-0
 spec:
+  selector:
+    matchLabels:
+      worker-dev: "true"
   qualifiers:
     cpu:
       - manufacturer: QEMU
         version: pc-i440fx-7.1
-    labelSelectors:
-      - "worker-dev": "true"
   configPatches:
     - op: add
       path: /machine/network/interfaces
       value:
-        - interface: eth0
+        - deviceSelector:
+            busPath: "0*"
           dhcp: true
         - interface: dummy0
           addresses:

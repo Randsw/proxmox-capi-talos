@@ -4,9 +4,6 @@ kind: Kustomization
 resources:
   # Pre Flux-Kustomizations
   - ./cluster-api-components.yaml
-  #- ./bootstrap.yaml
-  #- ./controlplane_old.yaml
-  #- ./infra_old.yaml
   - ./infrastructure-components.yaml
   - ./metallb.yaml
   - https://github.com/siderolabs/cluster-api-bootstrap-provider-talos/releases/download/v0.6.4/bootstrap-components.yaml

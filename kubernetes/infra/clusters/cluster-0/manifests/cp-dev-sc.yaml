@@ -10,13 +10,12 @@ spec:
     cpu:
       - manufacturer: QEMU
         version: pc-i440fx-7.1
-    # labelSelectors:
-    #   - "master-dev": "true"
   configPatches:
     - op: add
       path: /machine/network/interfaces
       value:
-        - interface: eth0
+        - deviceSelector:
+            busPath: "0*"
           dhcp: true
           vip:
             ip: "${CLUSTER_0_VIP}"

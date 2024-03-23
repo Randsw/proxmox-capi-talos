@@ -22,7 +22,7 @@ spec:
     controller:
       kind: DaemonSet
       service:
-        type: LoadBalancer
+        type: NodePort
       podAnnotations:
         fluentbit.io/parser: nginx_custom
       metrics:
