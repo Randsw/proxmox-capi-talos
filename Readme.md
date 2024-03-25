@@ -137,7 +137,7 @@ Now we fetch talosconfig and kubeconfig from the cluster:
 Find talosconfig name:
 
 ```bash
-kubectl get get talosconfigs
+kubectl get talosconfigs
 ```
 
 Find the one that start with `cluster-0-cp`
@@ -153,7 +153,7 @@ talosctl --talosconfig cluster-0.yaml kubeconfig --force -n <cluster-0-vip> -e <
 Change the API endpoint to the Talos cluster VIP `cluster-0-vip`
 
 ```bash
-kubectl --kubeconfig ~/.kube/config config set clusters.cluster-0.server https:/<cluster-0-vip>:6443
+kubectl --kubeconfig ~/.kube/config config set clusters.cluster-0.server https://<cluster-0-vip>:6443
 
 Property "clusters.cluster-0.server" set.
 ```
@@ -203,7 +203,7 @@ Now we fetch talosconfig and kubeconfig from the cluster:
 Find talosconfig name:
 
 ```bash
-kubectl get get talosconfigs
+kubectl get talosconfigs
 ```
 
 Find the one that start with `cluster-flux-cp`
@@ -219,7 +219,7 @@ talosctl --talosconfig cluster-flux.yaml kubeconfig --force -n <cluster-flux-vip
 Change the API endpoint to the Talos cluster VIP `cluster-flux-vip`
 
 ```bash
-kubectl --kubeconfig ~/.kube/config config set clusters.cluster-flux.server https:/<cluster-flux-vip>:6443
+kubectl --kubeconfig ~/.kube/config config set clusters.cluster-flux.server https://<cluster-flux-vip>:6443
 
 Property "clusters.cluster-flux.server" set.
 ```

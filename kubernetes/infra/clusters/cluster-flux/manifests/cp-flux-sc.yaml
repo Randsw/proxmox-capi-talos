@@ -89,7 +89,7 @@ spec:
               name: github-creds
               namespace: flux-system
             type: Opaque
-            stringData:
+            data:
               identity: ${identity}
               known_hosts: ${known_hosts}
     - op: replace
