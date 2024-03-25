@@ -22,3 +22,7 @@ spec:
       - kind: ConfigMap
         name: cluster-settings
         optional: false
+      - kind: Secret
+        name: github-creds
+        namespace: flux-system
+        optional: true

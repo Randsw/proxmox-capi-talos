@@ -81,6 +81,17 @@ spec:
                   app.kubernetes.io/part-of: flux
                   pod-security.kubernetes.io/warn: restricted
                   pod-security.kubernetes.io/warn-version: latest
+        - name: github-secret
+          contents: |-
+            apiVersion: v1
+            kind: Secret
+            metadata:
+              name: github-creds
+              namespace: flux-system
+            type: Opaque
+            stringData:
+              identity: ${identity}
+              known_hosts: ${known_hosts}
     - op: replace
       path: /cluster/extraManifests
       value:
