@@ -181,7 +181,6 @@ cluster:
         namespace: flux-system
       data:
         identity: ${base64encode(identity)}
-        identity.pub: ${base64encode(identitypub)}
         known_hosts: ${base64encode(knownhosts)}
   - name: proxmox-cloud-controller-manager # Proxmox cloud controller manager secret to access Proxmox API (Label nodes, set nodes region and cluster to support affinity etc. Add IP adress to Node yaml description)
     contents: |-
@@ -252,11 +251,10 @@ cluster:
     manifests:
     - https://raw.githubusercontent.com/randsw/proxmox-capi-talos/main/manifests/coredns-local.yaml        #Kubernetes DNS system
     - https://raw.githubusercontent.com/metallb/metallb/v0.13.9/config/manifests/metallb-native.yaml       #MetalLB deploy
-    #- https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml           #Deploy metrics server
     - https://github.com/fluxcd/flux2/releases/latest/download/install.yaml                                #FluxCD deploy
     - https://raw.githubusercontent.com/randsw/proxmox-capi-talos/main/manifests/fluxcd-kustomization.yaml #FluxCD kustomization and initialize GitReposytory with manifest to sync
-    - https://raw.githubusercontent.com/siderolabs/talos-cloud-controller-manager/main/docs/deploy/cloud-controller-manager.yml # Deploy Talos Cloud-controller 
-    - https://raw.githubusercontent.com/sergelogvinov/proxmox-cloud-controller-manager/main/docs/deploy/cloud-controller-manager-talos.yml # Deploy Proxmox Cloud-controller 
+    - https://raw.githubusercontent.com/siderolabs/talos-cloud-controller-manager/main/docs/deploy/cloud-controller-manager.yml # Deploy Talos Cloud-controller. Set labels on nodes from talos OS
+    - https://raw.githubusercontent.com/sergelogvinov/proxmox-cloud-controller-manager/main/docs/deploy/cloud-controller-manager-talos.yml # Deploy Proxmox Cloud-controller. Set labels on nodes from Proxmox system. 
     - https://raw.githubusercontent.com/prometheus-operator/prometheus-operator/v0.65.0/example/prometheus-operator-crd/monitoring.coreos.com_alertmanagerconfigs.yaml # Prometheus operator CRDs
     - https://raw.githubusercontent.com/prometheus-operator/prometheus-operator/v0.65.0/example/prometheus-operator-crd/monitoring.coreos.com_alertmanagers.yaml
     - https://raw.githubusercontent.com/prometheus-operator/prometheus-operator/v0.65.0/example/prometheus-operator-crd/monitoring.coreos.com_podmonitors.yaml

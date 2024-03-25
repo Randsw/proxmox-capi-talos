@@ -95,12 +95,12 @@ spec:
     - op: replace
       path: /cluster/extraManifests
       value:
-        - https://raw.githubusercontent.com/Randsw/proxmox-capi-talos/main/manifests/cert-approval.yaml
+        - https://raw.githubusercontent.com/Randsw/proxmox-capi-talos/main/manifests/cert-approval.yaml # Need to auto approve kubelet csr
         - https://raw.githubusercontent.com/Randsw/proxmox-capi-talos/main/manifests/coredns-local.yaml
-        - https://raw.githubusercontent.com/metallb/metallb/v0.13.9/config/manifests/metallb-native.yaml 
-        - https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml
-        - https://github.com/fluxcd/flux2/releases/latest/download/install.yaml
-        - https://raw.githubusercontent.com/Randsw/proxmox-capi-talos/main/kubernetes/infra/clusters/cluster-flux/manifests/fluxcd-kustomization.yaml
+        - https://raw.githubusercontent.com/metallb/metallb/v0.13.9/config/manifests/metallb-native.yaml  # Provide Loadbalancer service type
+        - https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml      # Install metrcis server
+        - https://github.com/fluxcd/flux2/releases/latest/download/install.yaml                            # Install FluxCD
+        - https://raw.githubusercontent.com/Randsw/proxmox-capi-talos/main/kubernetes/infra/clusters/cluster-flux/manifests/fluxcd-kustomization.yaml  # Kustomize FluxCD installation
     - op: replace
       path: /machine/registries/mirrors
       value:
