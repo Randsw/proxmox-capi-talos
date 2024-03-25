@@ -24,5 +24,4 @@ spec:
         optional: false
       - kind: Secret
         name: github-creds
-        namespace: flux-system
         optional: true
